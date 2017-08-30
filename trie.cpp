@@ -2,11 +2,11 @@
 #include "trie.h"
 
 Trie::Trie() {
-    root = nullptr;
+    root = NULL;
 }
 
 Node *Trie::newNode(int key, int num_child) {
-    auto *node = (Node *) malloc(sizeof(node));
+    Node* node = (Node *) malloc(sizeof(node));
     node->key = key;
     node->num_child = num_child;
     node->next = (Node **) malloc(num_child * sizeof(Node *));

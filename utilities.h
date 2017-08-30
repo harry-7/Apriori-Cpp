@@ -6,11 +6,22 @@
 #define CPP_UTILITIES_H
 
 #include <bits/stdc++.h>
+#include <tr1/unordered_map>
+
 
 using namespace std;
+using namespace std::tr1;
 
-void readConfig(string &input_file, string &output_file, float &support, float &confidence, bool&flag);
+typedef struct Configuration {
+    string input_file;
+    string output_file;
+    double support;
+    double confidence;
+    int flag;
+} Configuration;
 
-int readInput(unordered_map<string, int> &map, vector<string> &item_map);
+Configuration readConfig();
 
+int readInput(unordered_map<string, int> &map, vector<string> &item_map, string input_file);
+void makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, vector<int> &frequencies, string input_file);
 #endif //CPP_UTILITIES_H
