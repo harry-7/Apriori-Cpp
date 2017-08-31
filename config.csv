@@ -1,0 +1,5 @@
+input,/home/harry7/apriori_cpp/input.csv
+output,/home/harry7/apriori_cpp/output.csv
+support,0.2
+confidence,0.8
+flag,1
