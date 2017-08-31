@@ -1,5 +1,7 @@
 /*
  * Created by harry7 on 30/8/17.
+ *
+ * This file contains definition of functions which assist the apriori algorithm
  */
 
 #ifndef CPP_UTILITIES_H
@@ -22,6 +24,27 @@ typedef struct Configuration {
 
 Configuration readConfig();
 
+/**
+ * reads the file from the path given as input_file and prepares a map from items
+ * to an integer and inverse map from integer to the item
+ *
+ * @param map map from string to integer
+ * @param item_map inverse map from integer to string
+ * @param input_file string containing the path for input file
+ * @return number of records in the database
+ */
 int readInput(unordered_map<string, int> &map, vector<string> &item_map, string input_file);
-void makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, vector<int> &frequencies, string input_file);
+
+/**
+  Makes the table of transaction using the mapped indices and counts the frequencies
+  of single item sets in the table
+
+  @param table the data structure holding all the records in database
+  @param map1 map from item to the integer
+  @param frequencies data structure which should hold the frequency count of single items
+  @param input_file string containing the path for input file
+ */
+void
+makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, vector<int> &frequencies, string input_file);
+
 #endif //CPP_UTILITIES_H

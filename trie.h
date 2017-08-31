@@ -1,5 +1,8 @@
-/*
+/**
  * Created by harry7 on 30/8/17.
+ *
+ * This file contains the definitions for the Tree implementation to be used
+ * by the apriori algorithm
  */
 
 #ifndef CPP_TRIE_H
@@ -9,15 +12,15 @@
 
 using namespace std;
 typedef struct Node {
-    int key;
-    int num_child;
-    int count;
-    struct Node **next;
+    int key; /* Key of the item */
+    int num_child; /* Number of children in this node */
+    int count; /* number of item this node may occur in data */
+    struct Node **next; /* pointers to the children */
 } Node;
 
 class Trie {
 public:
-    Node *root;
+    Node *root; /* root of the tree */
 
     Trie();
 
