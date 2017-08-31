@@ -8,6 +8,8 @@
 #include <tr1/unordered_map>
 #include "utilities.h"
 
+#define DELIM ','
+
 using namespace std;
 using namespace std::tr1;
 
@@ -20,7 +22,7 @@ int readInput(unordered_map<string, int> &map, vector<string> &item_map, string 
         for (int i = 0; i < len; i++) {
             // Split words based on ','
             string word = "";
-            for (; i < len && line[i] != ','; ++i) {
+            for (; i < len && line[i] != DELIM; ++i) {
                 word += line[i];
             }
             items.insert(word);
@@ -68,7 +70,8 @@ Configuration readConfig() {
     return config;
 }
 
-void makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, vector<int> &frequencies, string input_file) {
+void
+makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, vector<int> &frequencies, string input_file) {
     ifstream input(input_file.c_str());
     int index = 0;
     set<int> set1;
@@ -76,7 +79,7 @@ void makeTable(vector<vector<int> > &table, unordered_map<string, int> &map1, ve
         unsigned long len = line.length();
         for (int i = 0; i < len; i++) {
             string word = "";
-            for (; i < len && line[i] != ','; ++i) {
+            for (; i < len && line[i] != DELIM; ++i) {
                 word += line[i];
             }
             set1.insert(map1[word]);

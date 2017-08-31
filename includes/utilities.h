@@ -15,11 +15,14 @@ using namespace std;
 using namespace std::tr1;
 
 typedef struct Configuration {
-    string input_file;
-    string output_file;
-    double support;
-    double confidence;
-    int flag;
+    string input_file; /* path of the input file */
+    string output_file; /* path of the file for the output to be written*/
+    double support; /* Minimum support needed for an item set to be frequent */
+    double confidence; /* Minimum confidence needed for an association rule */
+    int flag; /* Flag specifying the format of output. If the flag is one
+               * we have to output both frequent item sets and association rules
+               * else output only the frequent item sets
+               */
 } Configuration;
 
 Configuration readConfig();

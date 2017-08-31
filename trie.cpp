@@ -1,3 +1,10 @@
+/**
+ * Created by harry7 on 30/8/17.
+ *
+ * This file contains the Tree implementation defined in `trie.h`
+ * and will be used to Apriori algorithm
+ */
+
 #include <bits/stdc++.h>
 #include "trie.h"
 

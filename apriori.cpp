@@ -21,17 +21,20 @@
 using namespace std;
 using namespace std::tr1;
 
-vector<int> frequencies;
-vector<vector<int> > table;
-unordered_map<string, int> map1;
-unordered_map<int, int> map2;
-vector<int> single_item_sets;
-vector<vector<int> > tri_array;
-Trie tree;
-vector<string> item_map;
-vector<vector<vector<int> > > freq_item_sets;
-int min_count;
-Configuration config;
+/* ---------------- Global Variables ---------------- */
+vector<int> frequencies; /* counts for all the items in the dataset */
+unordered_map<string, int> map1; /* map from items to an integer */
+vector<vector<int> > table; /* table which contains transactions of the data base in compressed format */
+unordered_map<int, int> map2; /* map to be used for items which are frequent */
+vector<int> single_item_sets; /* Vector to hold all the frequent 1 item sets */
+vector<vector<int> > tri_array; /* Triangular array to hold the counts for 2 item sets */
+Trie tree; /* Hash tree to hold the counts for all item sets */
+vector<string> item_map; /* Reverse map from integer to the item */
+vector<vector<vector<int> > > freq_item_sets; /* List of all frequent item sets of the data */
+int min_count; /* minimum count of an item set for it to be frequent*/
+Configuration config; /* struct to hold the configuration given in `config.csv` */
+
+/* ---------------- Function Declarations  ---------------- */
 
 /**
  * Removes the in frequent items from each record of the table
@@ -71,9 +74,11 @@ int getAssociationRules(vector<vector<int> > &lhs, vector<vector<int> > &rhs);
 void writeOutput(int freq_item_count);
 
 
+/* ---------------- Driver program code ---------------- */
+
 int main() {
-    // Read the config from the config file
-    config = readConfig();
+    config = readConfig(); // Read the config from the config file
+
     /*
      * Read the input from the input file and prepare a map from items
      * and item map from integer to the item
@@ -82,13 +87,11 @@ int main() {
     table.resize((unsigned long) num_records);
     frequencies.resize(item_map.size());
 
-
     /*
      * Make the table from the input by the mapped values and count the frequencies
      * of all the items
      */
     makeTable(table, map1, frequencies, config.input_file);
-    // cerr << "Made table\n";
     int num_items = int(item_map.size());
     tree.root = tree.newNode(0, num_items + 1);
 
@@ -126,7 +129,6 @@ int main() {
             tri_array[i].push_back(0);
         }
     }
-    // cerr << "Single items Done with " << counter << "\n";
 
     // Go through the updated records and update the frequencies of each pair and update the tree
     updatePairFrequencies();
@@ -176,6 +178,7 @@ int main() {
                     ind2++;
                 }
                 if (ind2 == current) {
+                    // All the items are present so increase the count
                     k_set_frequencies[j]++;
                 }
             }
@@ -191,14 +194,13 @@ int main() {
             }
         }
         freq_item_count += k_freq_item_count;
-        // cerr << "current = " << current << " completed with " << k_freq_item_count << endl;
         current++;
     }
     writeOutput(freq_item_count);
     return 0;
 }
 
-/* Implementation of above declared methods */
+/* ---------------- Implementation of above declared methods  ---------------- */
 
 void purgeTable() {
 
